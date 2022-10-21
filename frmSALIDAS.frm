@@ -1,7 +1,7 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmSALIDAS 
    Caption         =   "..:: PLANILLA SALIDAS ::.."
-   ClientHeight    =   9660.001
+   ClientHeight    =   10455
    ClientLeft      =   120
    ClientTop       =   450
    ClientWidth     =   16650
@@ -67,7 +67,7 @@ Call CalcularOtrosDatos_Salidas
 If bolNuevaSalida = True Then
 '- Pasa los valores a la tabla 1...
     With Tabla.ListRows.Add
-        .Range(, 1) = Me.txtIDsalida                                        'IDSalidas.
+        .Range(, 1) = Me.txtIDSalida                                        'IDSalidas.
         .Range(, 2) = VBA.Trim(Me.txtFechaSalida.Value)                     'Fecha de la salida.
         .Range(, 3) = VBA.TimeValue(Me.txtHoraIni.Value)                    'Kilometraje al iniciar.
         .Range(, 4) = VBA.Val(Me.txtKmsIni.Value)                           'Kilometraje al iniciar.
@@ -77,7 +77,7 @@ If bolNuevaSalida = True Then
     End With
 '- Otros Datos que se guardan en la 2da tabla.
     With TablaCalculos.ListRows.Add
-        .Range(, 1) = Me.txtIDsalida                                        'IDSalidas.
+        .Range(, 1) = Me.txtIDSalida                                        'IDSalidas.
         .Range(, 2) = VBA.Val(Me.lblOtrosDatos_lDiaNro.Caption)             'Día nro.
         .Range(, 3) = VBA.Val(Me.lblOtrosDatos_lSemNro.Caption)             'Semana nro.
         .Range(, 4) = VBA.TimeValue(Me.txtOtrosDatos_TiempoConectado.Value) 'Tiempo Conectado.
@@ -92,13 +92,13 @@ If bolNuevaSalida = True Then
 ElseIf bolNuevaSalida = False Then   '- Es una modificación del registro. No se agrega, se reemplaza valores.
 ''- Pasa los valores de los txtboxes a la(s) tabla(s).
    
-    Call BuscarDatoEnTabla(strNombreTabla, Me.txtIDsalida.Text, 1)
+    Call BuscarDatoEnTabla(strNombreTabla, Me.txtIDSalida.Text, 1)
     
     Select Case bolDatoEncontrado
         Case Is = True
             intFilaDatoTabla = intDatoEncontradoIndiceTabla
             
-            ThisWorkbook.Sheets(Hoja2.Name).Cells(intFilaDatoTabla, 1) = Me.txtIDsalida                         'IDSalidas.
+            ThisWorkbook.Sheets(Hoja2.Name).Cells(intFilaDatoTabla, 1) = Me.txtIDSalida                         'IDSalidas.
             ThisWorkbook.Sheets(Hoja2.Name).Cells(intFilaDatoTabla, 2) = VBA.Trim(Me.txtFechaSalida.Value)      'Fecha de la salida.
             ThisWorkbook.Sheets(Hoja2.Name).Cells(intFilaDatoTabla, 3) = VBA.TimeValue(Me.txtHoraIni.Text)      'Kilometraje al iniciar.
             ThisWorkbook.Sheets(Hoja2.Name).Cells(intFilaDatoTabla, 4) = VBA.Val(Me.txtKmsIni.Value)
@@ -107,10 +107,10 @@ ElseIf bolNuevaSalida = False Then   '- Es una modificación del registro. No se 
             ThisWorkbook.Sheets(Hoja2.Name).Cells(intFilaDatoTabla, 7) = VBA.Val(Me.txtKmsVacio.Value)          'Kilometraje yendo vacío.
             
 '        '- Otros Datos que se guardan en la 2da tabla.
-            Call BuscarDatoEnTabla(strNombreTablaCalculos, Me.txtIDsalida.Text, 1)
+            Call BuscarDatoEnTabla(strNombreTablaCalculos, Me.txtIDSalida.Text, 1)
             intFilaDatoTabla = intDatoEncontradoIndiceTabla
 
-            ThisWorkbook.Sheets(Hoja6.Name).Cells(intFilaDatoTabla, 1) = Me.txtIDsalida     'IDSalidas.
+            ThisWorkbook.Sheets(Hoja6.Name).Cells(intFilaDatoTabla, 1) = Me.txtIDSalida     'IDSalidas.
             ThisWorkbook.Sheets(Hoja6.Name).Cells(intFilaDatoTabla, 2) = VBA.Val(Me.lblOtrosDatos_lDiaNro.Caption)
             ThisWorkbook.Sheets(Hoja6.Name).Cells(intFilaDatoTabla, 3) = VBA.Val(Me.lblOtrosDatos_lSemNro.Caption)
             ThisWorkbook.Sheets(Hoja6.Name).Cells(intFilaDatoTabla, 4) = VBA.TimeValue(Me.txtOtrosDatos_TiempoConectado.Value)
@@ -292,7 +292,7 @@ strFormActivo = Me.Name
 With Me
     .StartUpPosition = 0
     .Height = 320
-    .Width = 800
+    .Width = 844
     .Left = 50
     .Top = 50
 '---
@@ -314,7 +314,7 @@ With Me
         .Clear
         '.ColumnCount = -1   'Si se pone = -1 tomaría las columnas automaticamente.  'Aparentemente no le da bola.
         '.ColumnHeads = False                                                       'Aparentemente no le da bola.
-        .ColumnCount = 17
+        .ColumnCount = 18
         .List = Range(Cells(1, 1), Cells(1, .ColumnCount)).Value  'truco para aceptar mas de 10 columnas.
         .RemoveItem 0
         .ColumnWidths = "50 pt;50 pt;40 pt;60 pt;40 pt;45 pt;50 pt;30 pt;40 pt;50 pt;50 pt;50 pt;50 pt;50 pt;50 pt;30 pt"    'Aparentemente no le da bola.
@@ -481,7 +481,7 @@ Me.frameNuevoyEdicion.BorderColor = strColorFondo           'Color del borde del
 Me.frameNuevoyEdicion.BackColor = strColorFondo             'Color del fondo del frame.
 'Fecha y Horas
 Me.frameIDSalida.BackColor = strColorFondo
-Me.txtIDsalida.BackColor = &HC0FFFF
+Me.txtIDSalida.BackColor = &HC0FFFF
 Me.frameFECHA.BackColor = strColorFondo
 Me.frameHORAIN.BackColor = strColorFondo
 Me.frameHORAOUT.BackColor = strColorFondo
@@ -502,9 +502,9 @@ Me.lblOtrosDatos_6.BackColor = strColorFondo
 Me.lblOtrosDatos_7.BackColor = strColorFondo
 Me.lblOtrosDatos_8.BackColor = strColorFondo
 Me.lblOtrosDatos_9.BackColor = strColorFondo
-Me.lblOtrosDatos_10.BackColor = strColorFondo
-Me.lblOtrosDatos_11.BackColor = strColorFondo
-Me.lblOtrosDatos_12.BackColor = strColorFondo
+Me.Label48.BackColor = strColorFondo
+Me.Label49.BackColor = strColorFondo
+Me.Label50.BackColor = strColorFondo
 
 End Sub
 
@@ -513,7 +513,7 @@ Sub limpiaControles_Salidas()
 
 With Me
 '- Código ID: IDSALIDA.
-    .txtIDsalida.Value = Empty
+    .txtIDSalida.Value = Empty
 
 '- Fecha, y hora.
     .txtFechaSalida.Value = Empty
@@ -526,7 +526,7 @@ With Me
     .txtKmsVacio.Value = Empty
 
 '- Otros Datos
-    .txtOtrosDatos_Consumo.Value = Empty
+    .txtOtrosDatos_ConsumoApp.Value = Empty
     .txtOtrosDatos_ConsumoTotal.Value = Empty
     .txtOtrosDatos_ConsumoVacio.Value = Empty
     .txtOtrosDatos_KmsApp.Value = Empty
@@ -635,7 +635,7 @@ If strDatosCorrestos = vbYes Then
     Me.txtOtrosDatos_KMsTotal = dblKilometrosTotales
 
 'Consumo: App, en Vacio y Total.
-    Me.txtOtrosDatos_Consumo = dblConsumoApp
+    Me.txtOtrosDatos_ConsumoApp = dblConsumoApp
     Me.txtOtrosDatos_ConsumoVacio = dblConsumoVacio
     Me.txtOtrosDatos_ConsumoTotal = dblConsumoTotal
 
@@ -770,9 +770,9 @@ With Me
     .Height = 500               'Cambio tamaño del formu.
     .btnGuardar.Enabled = True  'habilita boton GUARDAR -
     .btnGuardar.Caption = "GUARDAR CAMBIOS"
-    .txtIDsalida.Locked = True
-    .txtIDsalida.Enabled = False
-    .txtIDsalida.BackStyle = fmBackStyleTransparent
+    .txtIDSalida.Locked = True
+    .txtIDSalida.Enabled = False
+    .txtIDSalida.BackStyle = fmBackStyleTransparent
 '- Titulo del frame.
     Me.frameNuevoyEdicion.Caption = "-<< MODIFICANDO LOS DATOS DE LA SALIDA SELECCIONADA>>-"
     Me.frameNuevoyEdicion.ForeColor = &H4040&
@@ -793,7 +793,7 @@ For i = intIdx_ListaDatos_Salida - 1 To 0 Step -1
     
     If Me.ListaDatos_Salidas.Selected(i) = True Then    'Si hay un item seleccionado...
 
-        Me.txtIDsalida = Me.ListaDatos_Salidas.List(i, 0)                                   'IDSALIDA.
+        Me.txtIDSalida = Me.ListaDatos_Salidas.List(i, 0)                                   'IDSALIDA.
         Me.txtFechaSalida = Me.ListaDatos_Salidas.List(i, 1)                                'Fecha de la Salida.
         Me.txtHoraIni = VBA.FormatDateTime(Me.ListaDatos_Salidas.List(i, 2), vbShortTime)   'Hora de Inicio.
         Me.txtKmsIni = Me.ListaDatos_Salidas.List(i, 3)                                     'Kilometraje al Inicio.
